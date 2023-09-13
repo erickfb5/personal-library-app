@@ -1,9 +1,13 @@
 "use strict";
 
 const express = require("express");
-const { getSingleBook, addNewComment } = require("../controllers");
+const { getSingleBook, addNewComment, deleteSingleBook } = require("../controllers");
 const router = express.Router();
 
-router.route("/api/books/:_id").get(getSingleBook).post(addNewComment);
+router
+  .route("/api/books/:id")
+  .get(getSingleBook)
+  .post(addNewComment)
+  .delete(deleteSingleBook);
 
 module.exports = router;

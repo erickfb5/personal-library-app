@@ -1,9 +1,13 @@
 "use strict";
 
 const express = require("express");
-const { getAllBooks, addNewBook } = require("../controllers");
+const { getAllBooks, addNewBook, deleteAllBooks } = require("../controllers");
 const router = express.Router();
 
-router.route("/api/books").get(getAllBooks).post(addNewBook);
+router
+  .route("/api/books")
+  .get(getAllBooks)
+  .post(addNewBook)
+  .delete(deleteAllBooks);
 
 module.exports = router;
