@@ -4,6 +4,7 @@ require("dotenv").config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const corsOptions = require("./config/corsOptions");
 const mongoose = require("mongoose");
 
 const apiRoutes = require("./routes/api.js");
@@ -24,8 +25,7 @@ app.use(loggerMiddleware);
 
 app.use("/public", express.static(process.cwd() + "/public"));
 
-app.use(cors({ origin: "*" })); //USED FOR FCC TESTING PURPOSES ONLY!
-
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
