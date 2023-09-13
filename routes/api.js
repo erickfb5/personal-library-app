@@ -1,6 +1,5 @@
 "use strict";
 
-const expect = require("chai").expect;
 const { deleteSingleBook } = require("../controllers");
 const Book = require("../models/Book");
 
@@ -59,6 +58,8 @@ module.exports = function (app) {
     .post(async (req, res) => {
       try {
         const bookid = req.params.id;
+        console.log("bookId", bookid)
+        
         const { comment } = req.body;
         if (!comment) return res.send("missing required field comment");
         const book = await Book.findOneAndUpdate(
