@@ -1,0 +1,34 @@
+{
+    "name": "personal-library-app",
+    "version": "1.0.0",
+    "description": "A full-stack JavaScript application for managing your personal library.",
+    "main": "server.js",
+    "scripts": {
+      "start": "node server.js"
+    },
+    "dependencies": {
+      "body-parser": "^1.15.2",
+      "chai": "^4.2.0",
+      "chai-http": "^4.3.0",
+      "cors": "^2.8.1",
+      "date-fns": "^2.30.0",
+      "dotenv": "^8.2.0",
+      "express": "^4.14.0",
+      "mocha": "^3.2.0",
+      "mongodb": "^6.0.0",
+      "mongoose": "^7.5.0",
+      "uuid": "^9.0.0",
+      "zombie": "^5.0.5"
+    },
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/erickfb5/personal-library-app.git"
+    },
+    "keywords": [
+      "node",
+      "hyperdev",
+      "express"
+    ],
+    "license": "MIT"
+  }
+  
