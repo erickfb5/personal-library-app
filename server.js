@@ -41,7 +41,7 @@ mongoose.connection.once("open", () => {
     console.log(
       `🟢 🟢 🟢 ⮕  Server running on port ${listener.address().port} 🏃`
     );
-    if (process.env.NODE_ENV === "test") {
+    if (process.env.NODE_ENV === "tests") {
       console.log("🟢 🟢 🟢 ⮕  Running Tests... 🧪");
       setTimeout(() => {
         try {
