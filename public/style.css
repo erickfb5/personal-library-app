@@ -36,6 +36,10 @@ h2 {
   margin-bottom: 15px;
 }
 
+ol {
+  list-style-position: inside; 
+}
+
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -87,7 +91,7 @@ button {
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s;
-  margin: 10px;
+  margin-right: 10px;
 }
 
 button:hover {

@@ -1,10 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // Define arrays to store book data
   let items = [];
   let itemsRaw = [];
 
   const getBooksList = () => {
-    // Clear the existing list
     const display = document.getElementById("display");
     display.innerHTML = "";
 
@@ -14,10 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
         itemsRaw = data;
         items = data
           .slice(0, 15)
-          .map(
-            (book, index) =>
-              `<li class="bookItem" id="${index}">${book.title} - ${book.commentcount} comments</li>`
-          );
+          .map((book, index) => `<li class="bookItem" id="${index}">${book.title} - ${book.commentcount} comments</li>`);
 
         if (data.length >= 15)
           items.push(`<p>...and ${data.length - 15} more!</p>`);
@@ -30,7 +25,6 @@ document.addEventListener("DOMContentLoaded", () => {
       .catch((err) => console.error("Error fetching books:", err));
   };
 
-  // Function to fetch book details and comments
   const fetchBookDetails = (bookId) => {
     fetch(`/api/books/${bookId}`)
       .then((response) => response.json())
@@ -51,7 +45,6 @@ document.addEventListener("DOMContentLoaded", () => {
       .catch((err) => console.error("Error fetching book details:", err));
   };
 
-  // Event listener for clicking on book items
   document.getElementById("display").addEventListener("click", (event) => {
     if (event.target && event.target.matches("li.bookItem")) {
       const itemId = event.target.id;
@@ -59,18 +52,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Event listener for deleting a book
   document.getElementById("bookDetail").addEventListener("click", (event) => {
     if (event.target && event.target.matches("button.deleteBook")) {
       const bookId = event.target.id;
-      fetch(`/api/books/${bookId}`, {
-        method: "DELETE",
-        headers: { "Content-Type": "application/json" },
-      })
-        .then((response) => {
-          if (!response.ok) throw new Error("Network response was not ok");
-          return response.text(); // Read the response body as text
-        })
+      fetch(`/api/books/${bookId}`, { method: "DELETE", headers: { "Content-Type": "application/json" } })
+        .then((response) => response.text())
         .then((data) => {
           const detailComments = document.getElementById("detailComments");
           detailComments.innerHTML = `<p style="color: red;">${data}<p><p>Refresh the page</p>`;
@@ -86,27 +72,17 @@ document.addEventListener("DOMContentLoaded", () => {
       })
         .then((response) => response.json())
         .then(() => fetchBookDetails(bookId))
-        .catch((err) =>
-          console.error(`Error adding a comment to book id: ${bookId}`, err)
-        );
+        .catch((err) => console.error(`Error adding a comment to book id: ${bookId}`, err));
     }
   });
 
-  // Event listener for submitting a new book
   document.getElementById("newBookForm").addEventListener("submit", (event) => {
     event.preventDefault();
     let newBookTitle = document.getElementById("newBookTitle").value;
     const title = JSON.stringify({ title: newBookTitle }); 
 
-    fetch("/api/books", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: title,
-    })
-      .then((response) => {
-        if (!response.ok) throw new Error("Network response was not ok");
-        return response.json();
-      })
+    fetch("/api/books", { method: "POST", headers: { "Content-Type": "application/json" }, body: title })
+      .then((response) => response.json())
       .then(() => {
         newBookTitle = "";
         getBooksList();
@@ -114,16 +90,11 @@ document.addEventListener("DOMContentLoaded", () => {
       .catch((err) => console.error("Error submitting new book title", err));
   });
 
-  // Event listener for deleting all books
   document.getElementById("deleteAllBooks").addEventListener("click", () => {
-    fetch("/api/books", {
-      method: "DELETE",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    })
+    fetch("/api/books", { method: "DELETE", headers: { "Content-Type": "application/x-www-form-urlencoded" } })
       .then(() => getBooksList())
       .catch((err) => console.error("Error deleting all books:", err));
   });
 
-  // Initial load of books
   getBooksList();
 });
