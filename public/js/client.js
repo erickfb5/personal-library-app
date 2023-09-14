@@ -14,7 +14,5 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   deleteAllBooks(items, itemsRaw);
 
-  
-
   displayBooks(fetchDetails, itemsRaw);
 });

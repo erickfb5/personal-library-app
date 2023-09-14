@@ -1,4 +1,4 @@
-const displayBooks = (itemsRaw) => {
+const displayBooks = (fetchDetails, itemsRaw) => {
   document.getElementById("display").addEventListener("click", async (event) => {
     if (event.target && event.target.matches("li.bookItem")) {
       try {
